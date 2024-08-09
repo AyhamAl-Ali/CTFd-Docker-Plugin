@@ -142,8 +142,9 @@ class ContainerManager:
             return False
         return container[0].status == "running"
 
+    # list of docker params: https://docker-py.readthedocs.io/en/stable/containers.html
     @run_command
-    def create_container(self, image: str, port: int, command: str, volumes: str):
+    def create_container(self, image: str, port: int, command: str, volumes: str, extraargs: str):
         kwargs = {}
 
         # Set the memory and CPU limits for the container
@@ -172,6 +173,15 @@ class ContainerManager:
                 kwargs["volumes"] = volumes_dict
             except json.decoder.JSONDecodeError:
                 raise ContainerException("Volumes JSON string is invalid")
+
+        if extraargs is not None and extraargs != "":
+            print("ExtraArgs:", extraargs)
+            try:
+                extraargs_dict = json.loads(extraargs)
+                # kwargs["extraargs"] = extraargs_dict
+                kwargs = {**kwargs, **extraargs_dict}
+            except json.decoder.JSONDecodeError:
+                raise ContainerException("ExtraArgs JSON string is invalid")
 
         try:
             return self.client.containers.run(
