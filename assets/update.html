@@ -83,4 +83,15 @@
 	</label>
 	<input type="text" class="form-control" name="volumes" value="{{ challenge.volumes }}">
 </div>
+
+<div class="form-group">
+	<label>
+		Extra Args<br>
+		<small class="form-text text-muted">
+			Extra per-container arguments, in JSON. E.g.
+			<pre>{"security_opt": ["seccomp:unconfined", "apparmor:docker-default"], "privileged": "true"}</pre>
+		</small>
+	</label>
+	<input type="text" class="form-control" name="extraargs" value="{{ challenge.volumes }}">
+</div>
 {% endblock %}

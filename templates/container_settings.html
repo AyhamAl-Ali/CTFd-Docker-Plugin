@@ -55,13 +55,6 @@
 					<input class="form-control" type="text" name="container_maxcpu" id="container_maxcpu"
 						placeholder="e.g. 1.5" value='{{ settings.container_maxcpu|default("") }}' />
 				</div>
-				<div class="form-group">
-					<label for="container_extraargs">
-						Extra per-container arguments (JSON format)
-					</label>
-					<input class="form-control" type="text" name="container_extraargs" id="container_extraargs"
-						placeholder='e.g. {"security_opt": ["seccomp:unconfined", "apparmor:docker-default"], "privileged": "true"}' value='{{ settings.container_extraargs|default("") }}' />
-				</div>
 				<div class="col-md-13 text-center">
 					<button type="submit" tabindex="0" class="btn btn-md btn-success btn-outlined">
 						Submit

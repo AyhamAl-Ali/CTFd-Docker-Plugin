@@ -14,6 +14,7 @@ class ContainerChallengeModel(Challenges):
     port = db.Column(db.Integer)
     command = db.Column(db.Text, default="")
     volumes = db.Column(db.Text, default="")
+    extraargs = db.Column(db.Text, default="")
 
     # Dynamic challenge properties
     initial = db.Column(db.Integer, default=0)

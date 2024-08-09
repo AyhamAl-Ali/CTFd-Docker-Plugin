@@ -425,9 +425,6 @@ def load(app: Flask):
         if request.form.get("container_maxcpu") is None:
             return {"error": "Invalid request"}, 400
 
-        if request.form.get("container_extraargs") is None:
-            return {"error": "Invalid request"}, 400
-
         docker_base_url = ContainerSettingsModel.query.filter_by(
             key="docker_base_url").first()
 
@@ -442,9 +439,6 @@ def load(app: Flask):
 
         container_maxcpu = ContainerSettingsModel.query.filter_by(
             key="container_maxcpu").first()
-
-        container_extraargs = ContainerSettingsModel.query.filter_by(
-            key="container_extraargs").first()
 
         # Create or update
         if docker_base_url is None:
@@ -496,16 +490,6 @@ def load(app: Flask):
         else:
             # Update
             container_maxcpu.value = request.form.get("container_maxcpu")
-
-        # Create or update
-        if container_extraargs is None:
-            # Create
-            container_extraargs = ContainerSettingsModel(
-                key="container_extraargs", value=request.form.get("container_extraargs"))
-            db.session.add(container_extraargs)
-        else:
-            # Update
-            container_extraargs.value = request.form.get("container_extraargs")
 
         db.session.commit()
 
