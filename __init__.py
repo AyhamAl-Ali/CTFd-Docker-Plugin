@@ -234,7 +234,7 @@ def load(app: Flask):
         # Run a new Docker container
         try:
             created_container = container_manager.create_container(
-                challenge.image, challenge.port, challenge.command, challenge.volumes)
+                challenge.image, challenge.port, challenge.command, challenge.volumes, challenge.extraargs)
         except ContainerException as err:
             return {"error": str(err)}
 
